@@ -27,7 +27,7 @@ describe Takeaway do
 	end
 
 	it "places the order" do
-		expect(takeaway).to receive(:place_order).and_return("Dummy text.")
+		expect(takeaway).to receive(:send_message).and_return("Dummy text.")
 		takeaway.place_order
 	end
 

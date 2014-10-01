@@ -1,8 +1,10 @@
 require 'rubygems'
 require 'twilio-ruby'
-require 'tokens'
+require_relative 'twilio'
 
 class Takeaway
+
+	include Twilio
 
 	attr_reader :client, :total_price
 
@@ -59,15 +61,7 @@ class Takeaway
 	end
 
 	def place_order
-		account_sid = Tokens::ACCOUNT_SID 
-		auth_token = Tokens::AUTH_TOKEN
-		delivery_time = Time.now + 3600
-		client = Twilio::REST::Client.new account_sid, auth_token
-		client.account.messages.create({
-			:from => '+441994342030', 
-			:to => '+447858009017',
-			:body => "Excellent choice of food! Your order will be with you by #{delivery_time.hour}:#{'%02d' %delivery_time.min}."
-		})
+		send_message
 	end
 
 end
